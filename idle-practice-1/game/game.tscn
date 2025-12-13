@@ -13,3 +13,9 @@ script = ExtResource("1_l1rk1")
 script = ExtResource("2_h7iqs")
 
 [node name="UserInterface" parent="." instance=ExtResource("2_vasa2")]
+
+[node name="SaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
