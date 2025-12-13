@@ -1,35 +1,49 @@
 class_name Upgrade
 extends Node
-## Abstract class defining an upgrade.
+## Base upgrade class with shared functionality
 
-## Emitted when the upgrades has leveled up.
 signal leveled_up
 
-## Level of the upgrade.
-var level : int = -1
-## Title or "name" of the upgrade.
-var title : String = "Title is not defined."
-## Base cost of the upgrade.
-var base_cost : int = -1
-## Current cost of the upgrade.
-var cost : int = -1
+var level : int = 0
+var title : String = "Upgrade"
+var base_cost : int = 5
+var cost : int
+var effect_text : String = "+1 Stardust / Level"
+var description_text : String = "Increases stardust generation."
+var data_level_key : String = ""
 
-## Virtual class, must be overwrittne. [br]
+## Initialize the upgrade with specific parameters
+func initialize(p_title: String, p_base_cost: int, p_data_key: String, p_description: String, p_effect: String) -> void:
+	title = p_title
+	base_cost = p_base_cost
+	data_level_key = p_data_key
+	description_text = p_description
+	effect_text = p_effect
+	
+	level = Game.ref.data.get(data_level_key)
+	calculate_cost()
+
 ## Returns the description of the upgrade.
 func description() -> String:
-	return "Description not defined."
+	var _description : String = description_text
+	_description += "\nEffects : %s" % effect_text
+	_description += "\nCost : %s" % cost
+	return _description
 
-## Virtual class, must be overwrittne. [br]
 ## Returns the current cost based on level and base cost.
 func calculate_cost() -> void:
-	printerr("calculate_cost() method not defined")
+	cost = int(base_cost + pow(1.5, level))
 
-## Virtual class, must be overwrittne. [br]
 ## Returns whether or not the player can afford buying the upgrade.
 func can_afford() -> bool:
-	return false
+	return HandlerStardust.ref.stardust() >= cost
 
-## Virtual class, must be overwrittne. [br]
 ## Consumes stardust to level up.
 func level_up() -> void:
-	printerr("level_up() method not defined.")
+	var error : Error = HandlerStardust.ref.consume_stardust(cost)
+	
+	if not error:
+		level += 1
+		Game.ref.data.set(data_level_key, level)
+		calculate_cost()
+		leveled_up.emit()

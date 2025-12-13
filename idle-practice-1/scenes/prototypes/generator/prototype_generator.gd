@@ -15,7 +15,7 @@ func _ready() -> void:
 
 ## Creates stardust and store it.
 func create_stardust() -> void:
-	HandlerStardust.ref.create_stardust(1)
+	HandlerStardust.ref.trigger_generator()
 	
 ## Start the timer and disable the button.
 func begin_generating_stardust() -> void:

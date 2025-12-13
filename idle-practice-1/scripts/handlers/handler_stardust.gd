@@ -42,6 +42,16 @@ func consume_stardust(quantity : int) -> Error:
 ## Triggered by the clicker; creates stardust.
 func trigger_clicker() -> void:
 	var quantity : int = 1
-	quantity += Game.ref.data.up_01_level
+	quantity += Game.ref.data.up_01_clicker_level
+	create_stardust(quantity)
+	
+func trigger_generator() -> void:
+	var quantity : int = 0 
+	
+	# Upgrade 1: +1 stardust per level
+	quantity += Game.ref.data.up_01_generator_level * 1
+	
+	# Upgrade 2: +2 stardust per level
+	quantity += Game.ref.data.up_02_generator_level * 2
 	
 	create_stardust(quantity)

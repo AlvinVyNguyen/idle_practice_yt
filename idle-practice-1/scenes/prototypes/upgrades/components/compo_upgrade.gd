@@ -9,11 +9,19 @@ extends Control
 ## Reference to the purchase button.
 @export var button : Button
 
+@export var upgrade_type : String = "Type of upgrade to display here"
+
 ## Upgrade to display.
 var upgrade : Upgrade
 
 func _ready() -> void:
-	upgrade = Up01ClickerUpgrade.new()
+	match upgrade_type:
+		"Up01ClickerUpgrade":
+			upgrade = Up01ClickerUpgrade.new()
+		"Up01GeneratorUpgrade":
+			upgrade = Up01GeneratorUpgrade.new()
+		"Up02GeneratorUpgrade":
+			upgrade = Up02GeneratorUpgrade.new()
 	
 	update_label_title()
 	update_label_description()

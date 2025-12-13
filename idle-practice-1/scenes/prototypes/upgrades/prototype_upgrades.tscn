@@ -49,3 +49,22 @@ theme_override_constants/margin_right = 64
 
 [node name="CompoUpgrade" parent="MarginContainer/VBoxContainer/MarginContainer2" instance=ExtResource("2_vym8l")]
 layout_mode = 2
+upgrade_type = "Up01ClickerUpgrade"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="CompoUpgrade" parent="MarginContainer/VBoxContainer/MarginContainer3" instance=ExtResource("2_vym8l")]
+layout_mode = 2
+upgrade_type = "Up01GeneratorUpgrade"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="CompoUpgrade" parent="MarginContainer/VBoxContainer/MarginContainer4" instance=ExtResource("2_vym8l")]
+layout_mode = 2
+upgrade_type = "Up02GeneratorUpgrade"
