@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vcgjm75w4rp3" path="res://scenes/prototypes/upgrades/components/compo_upgrade.gd" id="1_g3dr3"]
 
-[node name="CompoUpgrade" type="Control"]
+[node name="CompoUpgrade" type="Control" node_paths=PackedStringArray("label_title", "label_description", "button")]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 3
 anchors_preset = 14
@@ -12,6 +12,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g3dr3")
+label_title = NodePath("MarginContainer/HBoxContainer/Infos/VBoxContainer/Title")
+label_description = NodePath("MarginContainer/HBoxContainer/Infos/VBoxContainer/Description")
+button = NodePath("MarginContainer/HBoxContainer/PurchaseButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -66,3 +69,5 @@ Cost: "
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 text = "Purchase"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/PurchaseButton" to="." method="_on_purchase_button_pressed"]

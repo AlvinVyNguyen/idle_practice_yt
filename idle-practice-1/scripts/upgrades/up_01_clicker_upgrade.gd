@@ -11,35 +11,40 @@ var level : int = 0
 var title : String = "Clicker Upgrade"
 ## Base cost of the upgrade.
 var base_cost : int = 5
+## Current cost of the upgrade.
+var cost : int
 
 ## Load data.
 func _init() -> void:
 	level = Game.ref.data.up_01_level
+	calculate_cost()
 	
 ## Returhns the description containing effects and cost.
 func description() -> String:
 	var _description : String = "Increases the amount of stardust created by the Clicker."
-	_description += "\nEffects : +1 Stardsut / Level"
-	_description += "\nCost : %s" %cost()
+	_description += "\nEffects : +1 Stardust / Level"
+	_description += "\nCost : %s" %cost
 	
 	return _description
 
 ## Returns the current cost based on level and base cost.
-func cost() -> int:
-	return int(base_cost + pow(1.5, level))
+func calculate_cost() -> void:
+	cost = int(base_cost + pow(1.5, level))
 	
 ## Returns whether or not the player can afford buying the upgrade.
 func can_afford() -> bool:
-	if HandlerStardust.ref.stardust() >= cost():
+	if HandlerStardust.ref.stardust() >= cost:
 		return true
 	return false
 
 ## Consumes stardust to level up.
 func level_up() -> void:
-	var error : Error = HandlerStardust.ref.consume_stardust(cost())
+	var error : Error = HandlerStardust.ref.consume_stardust(cost)
 	
 	if not error:
 		level += 1
 		Game.ref.data.up_01_level = level
+		
+		calculate_cost()
 		
 		leveled_up.emit()
