@@ -1,28 +1,24 @@
-class_name CCU01StardustGenerator
+class_name CCU03UnlockNebulas
 extends Upgrade
-## Unlocks the passive Stardust generation.
+## CCUpgrade 03 : Unlocks Nebulas.
 
 var max_level : int = 1
 
 func _init() -> void:
-	title = "Awaken the Universe"
-	base_cost = 1
-	description_text = "Awaken the Universe to start generating Stardust."
-	effect_text = "passive Stardust generation"
-	level = Game.ref.data.cc_upgrades.u_01_stardust_generation_level
-	calculate_cost()
+	title = "Unlock Nebulas"
+	base_cost = 5
+	description_text = ""
+	effect_text = "Unlock the ability to create Nebulas."
+	level = Game.ref.data.cc_upgrades.u_03_unlock_nebulas
+	cost = 5
 
 ## Override description to show Consciousness Core cost instead of Stardust
 func description() -> String:
 	var _description : String = description_text
-	_description += "\n[b]Effect : [/b] %s" % effect_text
+	_description += "[b]Effect : [/b] %s" % effect_text
 	if level < max_level:
 		_description += "\n[b]Cost : [/b] %s Consciousness Core" % cost
 	return _description
-
-## Returns the current cost based on level and base cost.
-func calculate_cost() -> void:
-	cost = base_cost
 
 ## Returns whether or not the player can afford buying the upgrade.
 func can_afford() -> bool:
@@ -45,7 +41,7 @@ func level_up() -> void:
 		return
 	
 	level += 1
-	Game.ref.data.cc_upgrades.u_01_stardust_generation_level = true
+	Game.ref.data.cc_upgrades.u_03_unlock_nebulas = true
 	
 	leveled_up.emit()
 	HandlerCCUpgrades.ref.upgrade_leveled_up.emit(self)
