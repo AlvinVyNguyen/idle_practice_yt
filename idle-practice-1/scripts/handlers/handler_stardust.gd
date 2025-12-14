@@ -19,7 +19,6 @@ signal stardust_created(quantity : int)
 ## Emitted when stardust has been consumed.
 signal stardust_consumed(quantity : int)
 
-
 ## Returns the current amount of stardust available.
 func stardust() -> int:
 	return Game.ref.data.stardust
@@ -27,6 +26,7 @@ func stardust() -> int:
 ## Create a specific amount of stardust.
 func create_stardust(quantity : int) -> void:
 	Game.ref.data.stardust += quantity
+	Game.ref.data.universe.stardust += quantity
 	stardust_created.emit(quantity)
 
 ## Consume a specific amount of stardust.	

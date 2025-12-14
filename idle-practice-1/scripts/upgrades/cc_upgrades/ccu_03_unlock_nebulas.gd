@@ -6,11 +6,11 @@ var max_level : int = 1
 
 func _init() -> void:
 	title = "Unlock Nebulas"
-	base_cost = 5
+	base_cost = 2
+	cost = 2
 	description_text = ""
 	effect_text = "Unlock the ability to create Nebulas."
 	level = Game.ref.data.cc_upgrades.u_03_unlock_nebulas
-	cost = 5
 
 ## Override description to show Consciousness Core cost instead of Stardust
 func description() -> String:
