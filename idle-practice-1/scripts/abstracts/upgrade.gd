@@ -26,8 +26,8 @@ func initialize(p_title: String, p_base_cost: int, p_data_key: String, p_descrip
 ## Returns the description of the upgrade.
 func description() -> String:
 	var _description : String = description_text
-	_description += "\nEffects : %s" % effect_text
-	_description += "\nCost : %s" % cost
+	_description += "\n[b]Effect : [/b] %s" % effect_text
+	_description += "\n[b]Cost : [/b] %s stardust" % cost
 	return _description
 
 ## Returns the current cost based on level and base cost.

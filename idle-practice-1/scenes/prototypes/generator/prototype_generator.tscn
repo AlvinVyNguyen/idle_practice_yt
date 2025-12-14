@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://boguki5r27psh"]
 
 [ext_resource type="Script" uid="uid://dpdqobecmunuw" path="res://scenes/prototypes/generator/prototype_generator.gd" id="1_7p4aa"]
-[ext_resource type="Script" uid="uid://l6mg0d76rjgo" path="res://user_interface/stardust_label.gd" id="2_wb7vv"]
+[ext_resource type="Script" uid="uid://l6mg0d76rjgo" path="res://scenes/user_interface/stardust_label.gd" id="2_wb7vv"]
 
 [node name="PrototypeGenerator" type="Control" node_paths=PackedStringArray("button", "timer")]
 layout_mode = 3
