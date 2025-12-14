@@ -2,27 +2,13 @@ class_name CompoUpgrade
 extends Control
 ## Component displaying an upgrade.
 
-## Reference to the title label.
 @export var label_title : Label
-## Reference to the Rich text label description.
 @export var label_description : RichTextLabel
-## Reference to the purchase button.
 @export var button : Button
 
-@export var upgrade_type : String = "Type of upgrade to display here"
-
-## Upgrade to display.
 var upgrade : Upgrade
 
-func _ready() -> void:
-	match upgrade_type:
-		"Up01ClickerUpgrade":
-			upgrade = Up01ClickerUpgrade.new()
-		"Up01GeneratorUpgrade":
-			upgrade = Up01GeneratorUpgrade.new()
-		"Up02GeneratorUpgrade":
-			upgrade = Up02GeneratorUpgrade.new()
-	
+func _ready() -> void:	
 	update_label_title()
 	update_label_description()
 	update_button()
@@ -36,7 +22,7 @@ func _ready() -> void:
 
 ## Updates the title of the upgrade.
 func update_label_title() -> void:
-	var text : String = upgrade.title + " (%s)" %upgrade.level
+	var text : String = upgrade.title + " (%s)" % upgrade.level
 	label_title.text = text
 
 ## Updates the description of the upgrade.
@@ -53,4 +39,5 @@ func update_button(_quantity : int = -1) -> void:
 
 ## Triggered when purchase button is pressed.
 func _on_purchase_button_pressed() -> void:
-	upgrade.level_up()
+	if upgrade:
+		upgrade.level_up()
