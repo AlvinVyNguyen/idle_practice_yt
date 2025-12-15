@@ -2,7 +2,11 @@ class_name Upgrade
 extends Node
 ## Base upgrade class with shared functionality
 
+## Emitted when an upgrade is leveled up.
 signal leveled_up
+
+## Emitted when an upgrade is unlocked.
+signal upgrade_unlocked
 
 var level : int = 0
 var title : String = "Upgrade"
@@ -47,3 +51,7 @@ func level_up() -> void:
 		Game.ref.data.set(data_level_key, level)
 		calculate_cost()
 		leveled_up.emit()
+
+## Returns whether or not the upgrade has been unlocked.
+func is_unlocked() -> bool:
+	return false

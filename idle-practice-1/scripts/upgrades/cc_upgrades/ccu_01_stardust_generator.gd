@@ -49,3 +49,7 @@ func level_up() -> void:
 	
 	leveled_up.emit()
 	HandlerCCUpgrades.ref.upgrade_leveled_up.emit(self)
+
+## Returns whether or not the upgrade has been unlocked.
+func is_unlocked() -> bool:
+	return true

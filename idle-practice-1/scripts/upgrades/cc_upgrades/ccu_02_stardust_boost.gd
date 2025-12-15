@@ -14,6 +14,8 @@ func _init() -> void:
 	cost = 1
 	level = Game.ref.data.cc_upgrades.u_02_stardust_boost_level
 
+	if not is_unlocked():
+		HandlerCCUpgrades.ref.u_01_stardust_generation.leveled_up.connect(_on_ccu01_level_up)
 
 ## Override description to show Consciousness Core cost instead of Stardust
 func description() -> String:
@@ -48,3 +50,15 @@ func level_up() -> void:
 	
 	leveled_up.emit()
 	HandlerCCUpgrades.ref.upgrade_leveled_up.emit(self)
+
+## Returns whether or not the upgrade has been unlocked.
+func is_unlocked() -> bool:
+	if Game.ref.data.cc_upgrades.u_01_stardust_generation_level:
+		return true
+	
+	return false
+
+## Triggered when CCU01 is purchased. Unlocks this upgrade.
+func _on_ccu01_level_up() -> void:
+	HandlerCCUpgrades.ref.u_01_stardust_generation.leveled_up.disconnect(_on_ccu01_level_up)
+	HandlerCCUpgrades.ref.upgrade_unlocked.emit(self)
