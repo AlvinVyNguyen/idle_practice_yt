@@ -16,6 +16,9 @@ func _enter_tree() -> void:
 	
 	queue_free()
 
+## Emitted when generator power was calculated.
+signal generator_power_calculated
+
 ## Reference to the generator timer.
 @export var timer : Timer
 
@@ -49,3 +52,5 @@ func calculate_generator_power() -> void:
 	new_power += Game.ref.data.cc_upgrades.u_02_stardust_boost_level
 	
 	generator_power = new_power
+	
+	generator_power_calculated.emit()
