@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0lqfsf0hils1"]
+[gd_scene load_steps=8 format=3 uid="uid://b0lqfsf0hils1"]
 
 [ext_resource type="Script" uid="uid://b3bi2klkwywbw" path="res://scenes/user_interface/user_interface.gd" id="1_ur1vw"]
 [ext_resource type="Script" uid="uid://l6mg0d76rjgo" path="res://scenes/user_interface/stardust_label.gd" id="2_og86u"]
+[ext_resource type="Script" uid="uid://cxch48dbl8tnj" path="res://scenes/user_interface/nebulas_link_button.gd" id="2_pvt6f"]
 [ext_resource type="Script" uid="uid://pxnhg452rkgd" path="res://scenes/user_interface/consciouness_core_label.gd" id="3_6xuti"]
 [ext_resource type="PackedScene" uid="uid://dcn3ior7i2pvj" path="res://scenes/views/consciouness_core/consciouness_core_view.tscn" id="6_pvt6f"]
+[ext_resource type="PackedScene" uid="uid://mlb6857yn8xo" path="res://scenes/views/nebulas/nebulas_view.tscn" id="7_6xuti"]
 [ext_resource type="PackedScene" uid="uid://bvrc5jqm50go5" path="res://scenes/views/universe/universe_view.tscn" id="8_flq3v"]
 
 [node name="UserInterface" type="Control"]
@@ -62,6 +64,11 @@ text = "Universe"
 layout_mode = 2
 text = "ConsciousnessCoreLink"
 
+[node name="NebulasLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "NebulasLink"
+script = ExtResource("2_pvt6f")
+
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/LeftPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
@@ -119,8 +126,15 @@ user_interface = NodePath("../../..")
 view = 1
 
 [node name="UniverseView" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("8_flq3v")]
+visible = false
 layout_mode = 1
 user_interface = NodePath("../../..")
 
+[node name="NebulasView" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("7_6xuti")]
+layout_mode = 1
+user_interface = NodePath("../../..")
+view = 2
+
 [connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/UniverseLink" to="." method="_on_universe_link_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/ConsciousnessCoreLink" to="." method="_on_consciousness_core_link_pressed"]
+[connection signal="button_down" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/NebulasLink" to="." method="_on_nebulas_link_button_down"]
