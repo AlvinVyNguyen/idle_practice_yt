@@ -9,7 +9,35 @@ signal leveled_up
 signal upgrade_unlocked
 
 var level : int = 0
-var title : String = "Upgrade"
+var title : String = "Upgrade":
+	get:
+		var text : String = title
+		match level:
+			0:
+				pass  # No suffix for level 0
+			1:
+				text += " I"
+			2:
+				text += " II"
+			3:
+				text += " III"
+			4:
+				text += " IV"
+			5:
+				text += " V"
+			6:
+				text += " VI"
+			7:
+				text += " VII"
+			8:
+				text += " VIII"
+			9:
+				text += " IX"
+			10:
+				text += " X"
+			_:
+				text += " (Lv. %d)" % level  # Fallback for levels > 10
+		return text
 var base_cost : int = 5
 var cost : int
 var effect_text : String = "+1 Stardust / Level"
@@ -54,4 +82,8 @@ func level_up() -> void:
 
 ## Returns whether or not the upgrade has been unlocked.
 func is_unlocked() -> bool:
+	return false
+
+## Returns whether or not the upgrade hs been disabled.
+func is_disabled() -> bool:
 	return false

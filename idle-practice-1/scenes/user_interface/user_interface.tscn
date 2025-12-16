@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0lqfsf0hils1"]
+[gd_scene load_steps=6 format=3 uid="uid://b0lqfsf0hils1"]
 
-[ext_resource type="PackedScene" uid="uid://boguki5r27psh" path="res://scenes/prototypes/generator/prototype_generator.tscn" id="1_ratyj"]
 [ext_resource type="Script" uid="uid://b3bi2klkwywbw" path="res://scenes/user_interface/user_interface.gd" id="1_ur1vw"]
 [ext_resource type="Script" uid="uid://l6mg0d76rjgo" path="res://scenes/user_interface/stardust_label.gd" id="2_og86u"]
 [ext_resource type="Script" uid="uid://pxnhg452rkgd" path="res://scenes/user_interface/consciouness_core_label.gd" id="3_6xuti"]
-[ext_resource type="PackedScene" uid="uid://pow0q3k82rk1" path="res://scenes/prototypes/clicker/prototype_clicker.tscn" id="3_og86u"]
-[ext_resource type="PackedScene" uid="uid://drojiv6t8m012" path="res://scenes/prototypes/upgrades/prototype_upgrades.tscn" id="5_8p7hj"]
 [ext_resource type="PackedScene" uid="uid://dcn3ior7i2pvj" path="res://scenes/views/consciouness_core/consciouness_core_view.tscn" id="6_pvt6f"]
 [ext_resource type="PackedScene" uid="uid://bvrc5jqm50go5" path="res://scenes/views/universe/universe_view.tscn" id="8_flq3v"]
 
@@ -56,21 +53,6 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer"]
 layout_mode = 2
-
-[node name="PrototypeGeneratorLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Prototype Generator"
-
-[node name="PrototypeClickerLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Prototype Clicker"
-
-[node name="PrototypeUpgradeLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Prototype Upgrades"
 
 [node name="UniverseLink" type="LinkButton" parent="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -130,34 +112,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PrototypeGenerator" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("1_ratyj")]
-visible = false
-layout_mode = 1
-user_interface = NodePath("../../..")
-
-[node name="PrototypeClicker" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("3_og86u")]
-visible = false
-layout_mode = 1
-user_interface = NodePath("../../..")
-
-[node name="PrototypeUpgrades" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("5_8p7hj")]
-visible = false
-layout_mode = 1
-user_interface = NodePath("../../..")
-
 [node name="ConsciounessCoreView" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("6_pvt6f")]
 visible = false
 layout_mode = 1
 user_interface = NodePath("../../..")
-view = 4
+view = 1
 
 [node name="UniverseView" parent="HBoxContainer/MainView" node_paths=PackedStringArray("user_interface") instance=ExtResource("8_flq3v")]
 layout_mode = 1
 user_interface = NodePath("../../..")
-view = 3
 
-[connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/PrototypeGeneratorLink" to="." method="_on_prototype_generator_link_pressed"]
-[connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/PrototypeClickerLink" to="." method="_on_prototype_clicker_link_pressed"]
-[connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/PrototypeUpgradeLink" to="." method="_on_prototype_upgrade_link_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/UniverseLink" to="." method="_on_universe_link_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftPanel/VBoxContainer/Navigator/MarginContainer/VBoxContainer/ConsciousnessCoreLink" to="." method="_on_consciousness_core_link_pressed"]

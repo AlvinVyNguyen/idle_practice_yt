@@ -2,27 +2,36 @@ class_name CompoUpgrade
 extends Control
 ## Component displaying an upgrade.
 
+## Reference to the title label.
 @export var label_title : Label
+## Reference to the Rich text label description.
 @export var label_description : RichTextLabel
+## Reference to the purchase button.
 @export var button : Button
+
+@export var veil : ColorRect
 
 var upgrade : Upgrade
 
 func _ready() -> void:	
+	update_component()
+	
+	if not upgrade.is_disabled():
+		HandlerStardust.ref.stardust_created.connect(update_button)
+		HandlerStardust.ref.stardust_consumed.connect(update_button)
+		upgrade.leveled_up.connect(update_component)
+
+func update_component() -> void:
 	update_label_title()
 	update_label_description()
 	update_button()
+	update_veil()
 	
-	HandlerStardust.ref.stardust_created.connect(update_button)
-	HandlerStardust.ref.stardust_consumed.connect(update_button)
-	
-	upgrade.leveled_up.connect(update_label_title)
-	upgrade.leveled_up.connect(update_label_description)
-	upgrade.leveled_up.connect(update_button)
 
 ## Updates the title of the upgrade.
 func update_label_title() -> void:
-	var text : String = upgrade.title + " (%s)" % upgrade.level
+	#var text : String = upgrade.title + " (%s)" % upgrade.level
+	var text : String = upgrade.title
 	label_title.text = text
 
 ## Updates the description of the upgrade.
@@ -37,7 +46,27 @@ func update_button(_quantity : int = -1) -> void:
 	
 	button.disabled = true
 
+## Hides or Displays the veil based on the upgrade status.
+func update_veil() -> void:
+	if upgrade.is_disabled():
+		veil.visible = true
+		
+	else:
+		veil.visible = false
+
 ## Triggered when purchase button is pressed.
 func _on_purchase_button_pressed() -> void:
 	if upgrade:
 		upgrade.level_up()
+		_on_upgrade_leveled_up()
+
+## Triggered when upgrade levels up
+## Update the component and check if the signals must be disconnected or not
+func _on_upgrade_leveled_up() -> void:
+	update_component()
+	
+	if upgrade.is_disabled():
+		HandlerStardust.ref.stardust_created.disconnect(update_button)
+		HandlerStardust.ref.stardust_consumed.disconnect(update_button)
+		
+		upgrade.leveled_up.disconnect(update_component)
