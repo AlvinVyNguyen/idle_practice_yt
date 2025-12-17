@@ -6,7 +6,7 @@ extends Node
 signal leveled_up
 
 ## Emitted when an upgrade is unlocked.
-signal upgrade_unlocked
+#signal upgrade_unlocked
 
 var level : int = 0
 var title : String = "Upgrade":
